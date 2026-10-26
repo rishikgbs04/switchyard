@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "switchyard"
+version = "0.1.0"
+description = "Self-hosted, OpenAI-compatible LLM gateway: cost-aware routing, semantic caching, failover, budgets."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Rishik Gannavarapu" }]
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "httpx>=0.27",
+    "pydantic>=2.6",
+    "pyyaml>=6",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+embeddings = ["sentence-transformers>=3"]
+
+[tool.setuptools.packages.find]
+include = ["switchyard*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]

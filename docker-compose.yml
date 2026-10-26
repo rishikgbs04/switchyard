@@ -1,0 +1,20 @@
+services:
+  switchyard:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      - OPENAI_API_KEY
+      - ANTHROPIC_API_KEY
+      - OPENAI_BASE_URL
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - switchyard-data:/data
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports: ["9090:9090"]
+    volumes:
+      - ./deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+volumes:
+  switchyard-data:

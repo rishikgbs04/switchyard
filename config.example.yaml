@@ -1,0 +1,35 @@
+# Switchyard configuration.
+# Copy to config.yaml and edit. Prices are USD per 1M tokens; the values below
+# are placeholders for the mock provider. For real providers, copy current
+# prices from each provider's pricing page.
+
+require_auth: true
+db_path: switchyard.db
+breaker_failure_threshold: 3
+breaker_cooldown_seconds: 30
+
+cache:
+  enabled: true
+  similarity_threshold: 0.85
+  semantic_max_words: 40      # longer or code-bearing prompts use exact match only
+  ttl_seconds: 3600
+  max_entries: 10000
+
+api_keys:
+  - key: sk-dev-local
+    requests_per_minute: 120
+    monthly_budget_usd: 25.0
+
+models:
+  # Offline mock models: run, test and benchmark with no API keys.
+  - { name: mock-small,  provider: mock, tier: 1, input_cost_per_mtok: 0.10, output_cost_per_mtok: 0.40 }
+  - { name: mock-medium, provider: mock, tier: 2, input_cost_per_mtok: 1.00, output_cost_per_mtok: 4.00 }
+  - { name: mock-large,  provider: mock, tier: 3, input_cost_per_mtok: 5.00, output_cost_per_mtok: 25.00 }
+
+  # Real models: uncomment, set upstream names/prices, export OPENAI_API_KEY /
+  # ANTHROPIC_API_KEY. OPENAI_BASE_URL lets "openai" point at any
+  # OpenAI-compatible server (vLLM, Ollama, Groq, Together, ...).
+  # - { name: haiku,  provider: anthropic, upstream_name: claude-haiku-5-5,  tier: 1, input_cost_per_mtok: 0, output_cost_per_mtok: 0 }
+  # - { name: sonnet, provider: anthropic, upstream_name: claude-sonnet-5-5, tier: 2, input_cost_per_mtok: 0, output_cost_per_mtok: 0 }
+  # - { name: opus,   provider: anthropic, upstream_name: claude-opus-5-5,   tier: 3, input_cost_per_mtok: 0, output_cost_per_mtok: 0 }
+  # - { name: local-llama, provider: openai, upstream_name: llama3.1:8b, tier: 1, input_cost_per_mtok: 0, output_cost_per_mtok: 0 }
