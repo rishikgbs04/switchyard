@@ -1,5 +1,7 @@
 # Switchyard
 
+[![CI](https://github.com/rishikgbs04/switchyard/actions/workflows/ci.yml/badge.svg)](https://github.com/rishikgbs04/switchyard/actions/workflows/ci.yml)
+
 **A self-hosted, OpenAI-compatible LLM gateway.** Point any OpenAI SDK at Switchyard and every request gets cost-aware model routing, a safe semantic cache, automatic failover, per-key rate limits and budgets, and full cost/latency observability, with no application code changes.
 
 ```python
